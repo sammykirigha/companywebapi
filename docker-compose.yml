@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  web_api:
+    image: web_api
+    container_name: web_api_application
+    command: dotnet ef database update
+    ports:
+      - "5000:80"
+    networks:
+      - my_network
+    volumes:
+      - ./:/app
+    depends_on:
+      - ms-sql-server
+
+  ms-sql-server:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: MSSQLSERVER2022
+    hostname: MSSQLSERVER2022
+    ports:
+      - "1433:1433"
+    networks:
+      - my_network
+    volumes:
+      - ./data:/var/opt/mssql/data
+      - ./:/app
+    env_file:
+      - ./env/sqlserver.env
+
+networks:
+  my_network:
+    driver: bridge
