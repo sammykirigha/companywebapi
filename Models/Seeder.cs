@@ -11,7 +11,7 @@ namespace CompanyWebApi.Seed
             if (!employeesContext.Employees.Any())
             {
                 Fixture fixture = new Fixture();
-                fixture.Customize<Employee>(employee => employee.Without(e => e.EmployeeId));
+                fixture.Customize<Employee>(employee => employee.Without(e => e.Id));
                 List<Employee> employees = fixture.CreateMany<Employee>(20).ToList();
                 employeesContext.AddRange(employees);
                 employeesContext.SaveChanges();

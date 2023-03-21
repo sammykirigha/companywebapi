@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CompanyWebApi.Migrations
 {
     [DbContext(typeof(EmployeesContext))]
-    [Migration("20230321040101_MyFirstMigration")]
+    [Migration("20230321095302_MyFirstMigration")]
     partial class MyFirstMigration
     {
         /// <inheritdoc />
@@ -27,11 +27,11 @@ namespace CompanyWebApi.Migrations
 
             modelBuilder.Entity("CompanyWebApi.Entities.Employee", b =>
                 {
-                    b.Property<int?>("EmployeeId")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("EmployeeId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
@@ -69,14 +69,14 @@ namespace CompanyWebApi.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("EmployeeId");
+                    b.HasKey("Id");
 
                     b.ToTable("Employees");
 
                     b.HasData(
                         new
                         {
-                            EmployeeId = 1,
+                            Id = 1,
                             BirthDate = new DateTime(1995, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Department = "IT",
                             Email = "sammy@companywebapi.com",
@@ -92,7 +92,7 @@ namespace CompanyWebApi.Migrations
                         },
                         new
                         {
-                            EmployeeId = 2,
+                            Id = 2,
                             BirthDate = new DateTime(1999, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Department = "IT",
                             Email = "john@companywebapi.com",
@@ -108,7 +108,7 @@ namespace CompanyWebApi.Migrations
                         },
                         new
                         {
-                            EmployeeId = 3,
+                            Id = 3,
                             BirthDate = new DateTime(1985, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Department = "HR",
                             Email = "jane@companywebapi.com",
@@ -124,7 +124,7 @@ namespace CompanyWebApi.Migrations
                         },
                         new
                         {
-                            EmployeeId = 4,
+                            Id = 4,
                             BirthDate = new DateTime(1989, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Department = "Sales",
                             Email = "peter@companywebapi.com",

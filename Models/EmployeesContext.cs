@@ -18,7 +18,7 @@ namespace CompanyWebApi.Data
 
             modelBuilder.Entity<Employee>().HasData(new Employee
             {
-                EmployeeId = 1,
+                Id = 1,
                 EmployeeNumber = 0001,
                 FirstName = "Samuel",
                 LastName = "Kirigha",
@@ -34,7 +34,7 @@ namespace CompanyWebApi.Data
             });
             modelBuilder.Entity<Employee>().HasData(new Employee
             {
-                EmployeeId = 2,
+                Id = 2,
                 EmployeeNumber = 0002,
                 FirstName = "John",
                 LastName = "Mwasho",
@@ -50,7 +50,7 @@ namespace CompanyWebApi.Data
             });
             modelBuilder.Entity<Employee>().HasData(new Employee
             {
-                EmployeeId = 3,
+                Id = 3,
                 EmployeeNumber = 0003,
                 FirstName = "Jane",
                 LastName = "Wambui",
@@ -66,7 +66,7 @@ namespace CompanyWebApi.Data
             });
             modelBuilder.Entity<Employee>().HasData(new Employee
             {
-                EmployeeId = 4,
+                Id = 4,
                 EmployeeNumber = 0004,
                 FirstName = "Peter",
                 MaritalStatus = MaritalStatus.Single,

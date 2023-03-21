@@ -17,7 +17,7 @@ namespace CompanyWebApi.Migrations
                 name: "Employees",
                 columns: table => new
                 {
-                    EmployeeId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EmployeeNumber = table.Column<int>(type: "int", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -34,12 +34,12 @@ namespace CompanyWebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employees", x => x.EmployeeId);
+                    table.PrimaryKey("PK_Employees", x => x.Id);
                 });
 
             migrationBuilder.InsertData(
                 table: "Employees",
-                columns: new[] { "EmployeeId", "BirthDate", "Department", "Email", "EmployeeNumber", "FirstName", "Gender", "IDNumber", "JobTitle", "JoinedDate", "LastName", "MaritalStatus", "PhoneNumber" },
+                columns: new[] { "Id", "BirthDate", "Department", "Email", "EmployeeNumber", "FirstName", "Gender", "IDNumber", "JobTitle", "JoinedDate", "LastName", "MaritalStatus", "PhoneNumber" },
                 values: new object[,]
                 {
                     { 1, new DateTime(1995, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "IT", "sammy@companywebapi.com", 1, "Samuel", 0, 23049700, "Software Developer", new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Kirigha", 1, "09776573458" },
