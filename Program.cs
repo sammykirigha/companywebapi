@@ -1,4 +1,6 @@
 using CompanyWebApi.Data;
+using CompanyWebApi.Repositories;
+using CompanyWebApi.Repositories.Contracts;
 using CompanyWebApi.Seed;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +14,7 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 {
     sqlOptions.EnableRetryOnFailure();
 }));
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

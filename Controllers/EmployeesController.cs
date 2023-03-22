@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using CompanyWebApi.Data;
 using CompanyWebApi.Entities;
-using Microsoft.EntityFrameworkCore;
+using CompanyWebApi.Repositories.Contracts;
 
 namespace EmployeesApi.Controllers
 {
@@ -9,18 +8,35 @@ namespace EmployeesApi.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly EmployeesContext employeesContext;
+        private readonly IEmployeeRepository employeeRepository;
 
-        public EmployeesController(EmployeesContext employeesContext)
+        public EmployeesController(IEmployeeRepository employeeRepository)
         {
-            this.employeesContext = employeesContext;
+            this.employeeRepository = employeeRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Employee>>> GetAllEmployees()
+        public async Task<ActionResult<IEnumerable<Employee>>> GetAllEmployees()
         {
-            var employees = await employeesContext.Employees.ToArrayAsync();
-            return Ok(employees);
+            try
+            {
+                var employees = await employeeRepository.GetAllEmployees();
+                if (employees == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(employees);
+                }
+
+            }
+            catch (System.Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from database");
+            }
+
         }
 
         [HttpGet("{id:int}")]
@@ -28,7 +44,7 @@ namespace EmployeesApi.Controllers
         {
             try
             {
-                var employee = await employeesContext.Employees.FindAsync(id);
+                var employee = await employeeRepository.GetEmployeeById(id);
                 if (employee == null)
                 {
                     return BadRequest("Employee with that id was not found");
@@ -51,43 +67,61 @@ namespace EmployeesApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
         {
-            employeesContext.Employees.Add(employee);
-            await employeesContext.SaveChangesAsync();
-            return Ok(employee);
+            try
+            {
+                var newEmployee = await employeeRepository.CreateNewEmployee(employee);
+
+                if (newEmployee == null)
+                {
+                    return NoContent();
+                }
+
+                return Ok(newEmployee);
+            }
+            catch (System.Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from database");
+            }
+
         }
 
         [HttpPut("{id:int}")]
         public async Task<ActionResult<Employee>> UpdateEmployee(Employee employee, int id)
         {
-            var foundEmployee = await employeesContext.Employees.FindAsync(id);
-            if (foundEmployee == null) return BadRequest("Employee with that id was not found");
+            try
+            {
+                var foundEmployee = await employeeRepository.UpdateEmployee(employee, id);
+                if (foundEmployee == null) return BadRequest("Employee with that id was not found");
 
-            foundEmployee.MaritalStatus = employee.MaritalStatus;
-            foundEmployee.JobTitle = employee.JobTitle;
-            foundEmployee.Department = employee.Department;
-            foundEmployee.BirthDate = employee.BirthDate;
-            foundEmployee.EmployeeNumber = employee.EmployeeNumber;
-            foundEmployee.Email = employee.Email;
-            foundEmployee.FirstName = employee.FirstName;
-            foundEmployee.LastName = employee.LastName;
-            foundEmployee.Gender = employee.Gender;
-            foundEmployee.PhoneNumber = employee.PhoneNumber;
-            foundEmployee.Email = employee.Email;
-            foundEmployee.JoinedDate = employee.JoinedDate;
+                return Ok(employee);
+            }
+            catch (Exception ex)
+            {
 
-            await employeesContext.SaveChangesAsync();
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
 
-            return Ok(employee);
         }
 
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<Employee>> DeleteEmployee(int id)
         {
-            var employee = await employeesContext.Employees.FindAsync(id);
-            if (employee == null) return BadRequest("Employee with that id was not found");
-            employeesContext.Employees.Remove(employee);
-            await employeesContext.SaveChangesAsync();
-            return Ok("Employee deleted successfully");
+            try
+            {
+                var employee = await employeeRepository.DeleteEmployee(id);
+                if (employee == null)
+                {
+                    return NotFound();
+                }
+                return Ok("Employee deleted successfully");
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+
         }
     }
 }
