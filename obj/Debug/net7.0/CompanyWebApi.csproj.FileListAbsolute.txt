@@ -9,13 +9,16 @@ D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Azure.Core.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Azure.Identity.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Fare.dll
+D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Humanizer.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Microsoft.Identity.Client.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
@@ -27,9 +30,11 @@ D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Microsoft.OpenApi.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Mono.TextTemplating.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\System.CodeDom.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\System.Drawing.Common.dll
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
@@ -71,8 +76,3 @@ D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\obj\Debug\net
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\obj\Debug\net7.0\CompanyWebApi.pdb
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\obj\Debug\net7.0\CompanyWebApi.genruntimeconfig.cache
 D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\obj\Debug\net7.0\ref\CompanyWebApi.dll
-D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Humanizer.dll
-D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
-D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
-D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\Mono.TextTemplating.dll
-D:\sammyDoc\projects\work_projects\.net-work\web-api\CompanyWebApi\bin\Debug\net7.0\System.CodeDom.dll

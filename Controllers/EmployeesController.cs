@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using CompanyWebApi.Entities;
 using CompanyWebApi.Repositories.Contracts;
+using CompanyWebApi.Data;
 
 namespace EmployeesApi.Controllers
 {
@@ -9,6 +10,7 @@ namespace EmployeesApi.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeRepository employeeRepository;
+
 
         public EmployeesController(IEmployeeRepository employeeRepository)
         {
@@ -70,18 +72,19 @@ namespace EmployeesApi.Controllers
             try
             {
                 var newEmployee = await employeeRepository.CreateNewEmployee(employee);
-
                 if (newEmployee == null)
                 {
                     return NoContent();
                 }
-
-                return Ok(newEmployee);
+                else
+                {
+                    return Ok(newEmployee);
+                }
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
 
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from database");
+                return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
             }
 
         }

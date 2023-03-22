@@ -2,6 +2,7 @@
 
 using CompanyWebApi.Data;
 using CompanyWebApi.Entities;
+using CompanyWebApi.Exceptions;
 using CompanyWebApi.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,9 +31,27 @@ namespace CompanyWebApi.Repositories
 
         public async Task<Employee> CreateNewEmployee(Employee employee)
         {
-            this.employeesContext.Employees.Add(employee);
-            await employeesContext.SaveChangesAsync();
-            return employee;
+            try
+            {
+                var existingEmployee = employeesContext.Employees.FirstOrDefault(e => e.Email == employee.Email);
+                if (existingEmployee == null)
+                {
+                    this.employeesContext.Employees.Add(employee);
+                    await employeesContext.SaveChangesAsync();
+                    return employee;
+                }
+                else
+                {
+                    throw new CreateNewEmployeeErrorHandler();
+                }
+            }
+            catch (ErrorHandlerException ex)
+            {
+
+                throw new ErrorHandlerException(ex.Message);
+            }
+
+
         }
 
         public async Task<Employee> DeleteEmployee(int id)
