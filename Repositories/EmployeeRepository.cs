@@ -17,9 +17,9 @@ namespace CompanyWebApi.Repositories
             this.employeesContext = employeesContext;
         }
 
-        public async Task<IEnumerable<Employee>> GetAllEmployees()
+        public async Task<ICollection<Employee>> GetAllEmployees()
         {
-            var employees = await this.employeesContext.Employees.ToListAsync();
+            var employees = await this.employeesContext.Employees.OrderBy(e => e.Id).ToListAsync();
             return employees;
         }
 

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using CompanyWebApi.Entities;
+using AutoMapper;
 using CompanyWebApi.Repositories.Contracts;
 using CompanyWebApi.Data;
 
@@ -10,6 +11,7 @@ namespace EmployeesApi.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeRepository employeeRepository;
+        private readonly IMapper _mapper;
 
 
         public EmployeesController(IEmployeeRepository employeeRepository)
