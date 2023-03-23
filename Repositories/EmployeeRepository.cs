@@ -1,6 +1,8 @@
 
 
+using AutoMapper;
 using CompanyWebApi.Data;
+using CompanyWebApi.Dto;
 using CompanyWebApi.Entities;
 using CompanyWebApi.Exceptions;
 using CompanyWebApi.Repositories.Contracts;
@@ -11,16 +13,18 @@ namespace CompanyWebApi.Repositories
     public class EmployeeRepository : IEmployeeRepository
     {
         private readonly EmployeesContext employeesContext;
+        private readonly IMapper _mapper;
 
-        public EmployeeRepository(EmployeesContext employeesContext)
+        public EmployeeRepository(EmployeesContext employeesContext, IMapper mapper)
         {
             this.employeesContext = employeesContext;
+            _mapper = mapper;
         }
 
-        public async Task<ICollection<Employee>> GetAllEmployees()
+        public ICollection<Employee> GetAllEmployees()
         {
-            var employees = await this.employeesContext.Employees.OrderBy(e => e.Id).ToListAsync();
-            return employees;
+            return employeesContext.Employees.OrderBy(e => e.Id).ToList();
+
         }
 
         public async Task<Employee> GetEmployeeById(int id)

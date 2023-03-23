@@ -3,6 +3,7 @@ using CompanyWebApi.Entities;
 using AutoMapper;
 using CompanyWebApi.Repositories.Contracts;
 using CompanyWebApi.Data;
+using CompanyWebApi.Dto;
 
 namespace EmployeesApi.Controllers
 {
@@ -14,17 +15,19 @@ namespace EmployeesApi.Controllers
         private readonly IMapper _mapper;
 
 
-        public EmployeesController(IEmployeeRepository employeeRepository)
+        public EmployeesController(IEmployeeRepository employeeRepository, IMapper mapper)
         {
             this.employeeRepository = employeeRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> GetAllEmployees()
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Employee>))]
+        public IActionResult GetAllEmployees()
         {
             try
             {
-                var employees = await employeeRepository.GetAllEmployees();
+                var employees = _mapper.Map<List<EmployeeDto>>(employeeRepository.GetAllEmployees());
                 if (employees == null)
                 {
                     return NotFound();

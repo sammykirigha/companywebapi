@@ -6,7 +6,7 @@ namespace CompanyWebApi.Repositories.Contracts
 {
     public interface IEmployeeRepository
     {
-        Task<ICollection<Employee>> GetAllEmployees();
+        ICollection<Employee> GetAllEmployees();
 
         Task<Employee> GetEmployeeById(int id);
 
