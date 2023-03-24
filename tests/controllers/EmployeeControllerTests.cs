@@ -43,5 +43,25 @@ namespace CompanyWebApi.tests.controllers
             result.Should().NotBeNull();
             result.Should().BeOfType(typeof(OkObjectResult));
         }
+
+        [Fact]
+        public void EmployeeControler_CreateEmployee_ReturnOK()
+        {
+
+            var employeeMap = A.Fake<Employee>();
+            var employee = A.Fake<Employee>();
+            var employeeToCreate = A.Fake<EmployeeDto>();
+            var employees = A.Fake<ICollection<EmployeeDto>>();
+            var employeeList = A.Fake<List<EmployeeDto>>();
+
+            A.CallTo(() => _mapper.Map<Employee>(employeeToCreate)).Returns(employee);
+            A.CallTo(() => _employeeRepository.CreateNewEmployee(employeeMap)).Returns(employee);
+            var controller = new EmployeesController(_employeeRepository, _mapper);
+
+            var result = controller.CreateEmployee(employeeToCreate);
+
+            result.Should().NotBeNull();
+
+        }
     }
 }

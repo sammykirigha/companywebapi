@@ -33,16 +33,16 @@ namespace CompanyWebApi.Repositories
             return employee;
         }
 
-        public async Task<Employee> CreateNewEmployee(Employee employee)
+        public Employee CreateNewEmployee(Employee employeeToCreate)
         {
             try
             {
-                var existingEmployee = employeesContext.Employees.FirstOrDefault(e => e.Email == employee.Email);
+                var existingEmployee = employeesContext.Employees.FirstOrDefault(e => e.Email == employeeToCreate.Email);
                 if (existingEmployee == null)
                 {
-                    this.employeesContext.Employees.Add(employee);
-                    await employeesContext.SaveChangesAsync();
-                    return employee;
+                    this.employeesContext.Employees.Add(employeeToCreate);
+                    employeesContext.SaveChanges();
+                    return employeeToCreate;
                 }
                 else
                 {

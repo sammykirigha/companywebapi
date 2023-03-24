@@ -10,7 +10,7 @@ namespace CompanyWebApi.Repositories.Contracts
 
         Task<Employee> GetEmployeeById(int id);
 
-        Task<Employee> CreateNewEmployee(Employee employee);
+        Employee CreateNewEmployee(Employee employeeToCreate);
 
         Task<Employee> DeleteEmployee(int id);
 

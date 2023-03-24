@@ -72,11 +72,12 @@ namespace EmployeesApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
+        public IActionResult CreateEmployee([FromBody] EmployeeDto employeeToCreate)
         {
             try
             {
-                var newEmployee = await employeeRepository.CreateNewEmployee(employee);
+                var employeeMap = _mapper.Map<Employee>(employeeToCreate);
+                var newEmployee = employeeRepository.CreateNewEmployee(employeeMap);
                 if (newEmployee == null)
                 {
                     return NoContent();
@@ -131,5 +132,6 @@ namespace EmployeesApi.Controllers
             }
 
         }
+
     }
 }
