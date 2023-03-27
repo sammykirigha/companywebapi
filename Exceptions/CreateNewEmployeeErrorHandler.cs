@@ -5,21 +5,21 @@ using System.Threading.Tasks;
 
 namespace CompanyWebApi.Exceptions
 {
-    public class CreateNewEmployeeErrorHandler : ErrorHandlerException
+    public class EmployeeErrorHandler : ErrorHandlerException
     {
         private const string DefaultMessage = "User already exist with that email!! Email taken";
 
         public string? Email { get; }
 
-        public CreateNewEmployeeErrorHandler() : base(DefaultMessage)
+        public EmployeeErrorHandler() : base(DefaultMessage)
         { }
 
-        public CreateNewEmployeeErrorHandler(Exception innerException) : base(DefaultMessage, innerException)
+        public EmployeeErrorHandler(Exception innerException) : base(DefaultMessage, innerException)
         { }
 
-        public CreateNewEmployeeErrorHandler(string message, Exception innerException) : base(message, innerException)
+        public EmployeeErrorHandler(string message, Exception innerException) : base(message, innerException)
         { }
 
-        public CreateNewEmployeeErrorHandler(string email) : base(DefaultMessage) => Email = email;
+        public EmployeeErrorHandler(string email) : base(DefaultMessage) => Email = email;
     }
 }

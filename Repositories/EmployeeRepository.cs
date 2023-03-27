@@ -23,17 +23,37 @@ namespace CompanyWebApi.Repositories
 
         public ICollection<Employee> GetAllEmployees()
         {
-            return employeesContext.Employees.OrderBy(e => e.Id).ToList();
+            try
+            {
+                var employees = employeesContext.Employees.OrderBy(e => e.Id).ToList();
+                return employees;
+
+            }
+            catch (ErrorHandlerException ex)
+            {
+
+                throw new ErrorHandlerException(ex.Message);
+            }
 
         }
 
-        public async Task<Employee> GetEmployeeById(int id)
+        public EmployeeDto GetEmployeeById(int id)
         {
-            var employee = await this.employeesContext.Employees.FindAsync(id);
-            return employee;
+            try
+            {
+                var employee = this.employeesContext.Employees.Find(id);
+                var returnedEmployeeDto = _mapper.Map<EmployeeDto>(employee);
+                return returnedEmployeeDto == null ? throw new EmployeeErrorHandler("Could not retrieve employee with that id") : returnedEmployeeDto;
+            }
+            catch (Exception)
+            {
+
+                throw new ErrorHandlerException("Error occurred while retrieving the employee!");
+            }
+
         }
 
-        public Employee CreateNewEmployee(Employee employeeToCreate)
+        public EmployeeDto CreateNewEmployee(Employee employeeToCreate)
         {
             try
             {
@@ -42,11 +62,13 @@ namespace CompanyWebApi.Repositories
                 {
                     this.employeesContext.Employees.Add(employeeToCreate);
                     employeesContext.SaveChanges();
-                    return employeeToCreate;
+                    var createdEmployee = employeesContext.Employees.FirstOrDefault(e => e.Email == employeeToCreate.Email);
+                    var employeeToCreateMap = _mapper.Map<EmployeeDto>(createdEmployee);
+                    return employeeToCreateMap;
                 }
                 else
                 {
-                    throw new CreateNewEmployeeErrorHandler();
+                    throw new EmployeeErrorHandler();
                 }
             }
             catch (ErrorHandlerException ex)
@@ -58,34 +80,63 @@ namespace CompanyWebApi.Repositories
 
         }
 
-        public async Task<Employee> DeleteEmployee(int id)
+        public EmployeeDto DeleteEmployee(int id)
         {
-            var employee = await employeesContext.Employees.FindAsync(id);
-            employeesContext.Employees.Remove(employee);
-            await employeesContext.SaveChangesAsync();
-            return employee;
+
+            try
+            {
+                var employee = employeesContext.Employees.Find(id);
+                var deletedEmployee = _mapper.Map<EmployeeDto>(employee);
+                employeesContext.Employees.Remove(employee);
+                employeesContext.SaveChangesAsync();
+                return employee == null ? throw new EmployeeErrorHandler("No Employee with that record found") : deletedEmployee;
+            }
+            catch (ErrorHandlerException ex)
+            {
+
+                throw new ErrorHandlerException("No Employee with that record found");
+            }
+
         }
 
-        public async Task<Employee> UpdateEmployee(Employee employee, int id)
+        public Employee UpdateEmployee(EmployeeDto employee, int id)
         {
-            var foundEmployee = await employeesContext.Employees.FindAsync(id);
+            try
+            {
+                var foundEmployee = employeesContext.Employees.Find(id);
+                if (foundEmployee != null)
+                {
+                    foundEmployee.MaritalStatus = employee.MaritalStatus;
+                    foundEmployee.JobTitle = employee.JobTitle;
+                    foundEmployee.Department = employee.Department;
+                    foundEmployee.EmployeeNumber = employee.EmployeeNumber;
+                    foundEmployee.Email = employee.Email;
+                    foundEmployee.FirstName = employee.FirstName;
+                    foundEmployee.LastName = employee.LastName;
+                    foundEmployee.Gender = employee.Gender;
+                    foundEmployee.PhoneNumber = employee.PhoneNumber;
+                    foundEmployee.Email = employee.Email;
+                    foundEmployee.JoinedDate = employee.JoinedDate;
 
-            foundEmployee.MaritalStatus = employee.MaritalStatus;
-            foundEmployee.JobTitle = employee.JobTitle;
-            foundEmployee.Department = employee.Department;
-            foundEmployee.BirthDate = employee.BirthDate;
-            foundEmployee.EmployeeNumber = employee.EmployeeNumber;
-            foundEmployee.Email = employee.Email;
-            foundEmployee.FirstName = employee.FirstName;
-            foundEmployee.LastName = employee.LastName;
-            foundEmployee.Gender = employee.Gender;
-            foundEmployee.PhoneNumber = employee.PhoneNumber;
-            foundEmployee.Email = employee.Email;
-            foundEmployee.JoinedDate = employee.JoinedDate;
+                    employeesContext.SaveChangesAsync();
 
-            await employeesContext.SaveChangesAsync();
+                    var updatedEmployee = employeesContext.Employees.Find(id);
 
-            return employee;
+                    return updatedEmployee;
+                }
+                else
+                {
+                    throw new EmployeeErrorHandler("No Employee with that record found");
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new EmployeeErrorHandler(ex.Message);
+            }
+
         }
     }
 }

@@ -22,70 +22,52 @@ namespace EmployeesApi.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<Employee>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Employee>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAllEmployees()
         {
             try
             {
-                var employees = _mapper.Map<List<EmployeeDto>>(employeeRepository.GetAllEmployees());
-                if (employees == null)
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    return Ok(employees);
-                }
+                var employees = employeeRepository.GetAllEmployees();
+                var employeesDto = _mapper.Map<List<EmployeeDto>>(employees);
+                return employeesDto == null ? NotFound() : Ok(employeesDto);
 
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
 
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from database");
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
 
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Employee>> GetEmployeeById(int id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<EmployeeDto> GetEmployeeById(int id)
         {
             try
             {
-                var employee = await employeeRepository.GetEmployeeById(id);
-                if (employee == null)
-                {
-                    return BadRequest("Employee with that id was not found");
-                }
-                else
-                {
-                    return Ok(employee);
-                }
+                var employee = employeeRepository.GetEmployeeById(id);
+                return employee == null ? NotFound("Employee with that id was not found") : Ok(employee);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from database");
+                return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
             }
 
 
         }
 
         [HttpPost]
-        public IActionResult CreateEmployee([FromBody] EmployeeDto employeeToCreate)
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Employee))]
+        public IActionResult CreateEmployee([FromBody] Employee employeeToCreate)
         {
             try
             {
-                var employeeMap = _mapper.Map<Employee>(employeeToCreate);
-                var newEmployee = employeeRepository.CreateNewEmployee(employeeMap);
-                if (newEmployee == null)
-                {
-                    return NoContent();
-                }
-                else
-                {
-                    return Ok(newEmployee);
-                }
+                var newEmployee = employeeRepository.CreateNewEmployee(employeeToCreate);
+                return newEmployee == null ? NoContent() : Ok(newEmployee);
             }
             catch (Exception ex)
             {
@@ -96,39 +78,35 @@ namespace EmployeesApi.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<Employee>> UpdateEmployee(Employee employee, int id)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Employee))]
+        public ActionResult<Employee> UpdateEmployee(EmployeeDto employee, int id)
         {
             try
             {
-                var foundEmployee = await employeeRepository.UpdateEmployee(employee, id);
-                if (foundEmployee == null) return BadRequest("Employee with that id was not found");
-
-                return Ok(employee);
+                var updatedEmployee = employeeRepository.UpdateEmployee(employee, id);
+                var updatedEmployeeDto = _mapper.Map<EmployeeDto>(updatedEmployee);
+                return updatedEmployee == null ? NotFound("Employee with that id was not found") : Ok(updatedEmployeeDto);
             }
             catch (Exception ex)
             {
 
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
             }
-
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult<Employee>> DeleteEmployee(int id)
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Employee))]
+        public ActionResult<EmployeeDto> DeleteEmployee(int id)
         {
             try
             {
-                var employee = await employeeRepository.DeleteEmployee(id);
-                if (employee == null)
-                {
-                    return NotFound();
-                }
-                return Ok("Employee deleted successfully");
+                var employee = employeeRepository.DeleteEmployee(id);
+                return employee == null ? NotFound() : Ok("Employee deleted successfully");
             }
             catch (Exception ex)
             {
 
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
             }
 
         }

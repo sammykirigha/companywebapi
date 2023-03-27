@@ -1,5 +1,6 @@
 
 
+using CompanyWebApi.Dto;
 using CompanyWebApi.Entities;
 
 namespace CompanyWebApi.Repositories.Contracts
@@ -8,12 +9,12 @@ namespace CompanyWebApi.Repositories.Contracts
     {
         ICollection<Employee> GetAllEmployees();
 
-        Task<Employee> GetEmployeeById(int id);
+        EmployeeDto GetEmployeeById(int id);
 
-        Employee CreateNewEmployee(Employee employeeToCreate);
+        EmployeeDto CreateNewEmployee(Employee employeeToCreate);
 
-        Task<Employee> DeleteEmployee(int id);
+        EmployeeDto DeleteEmployee(int id);
 
-        Task<Employee> UpdateEmployee(Employee employee, int id);
+        Employee UpdateEmployee(EmployeeDto employeeToUpdate, int id);
     }
 }
