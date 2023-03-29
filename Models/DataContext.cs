@@ -4,17 +4,28 @@ using CompanyWebApi.enums;
 
 namespace CompanyWebApi.Data
 {
-    public class EmployeesContext : DbContext
+    public class DataContext : DbContext
     {
-        public EmployeesContext(DbContextOptions<EmployeesContext> options) : base(options)
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
 
+        public DbSet<User> Users { get; set; }
         public DbSet<Employee> Employees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Id = 1,
+                Email = "sammy@test.com",
+                Username = "Sammy",
+                PasswordHash = "$2a$11$qb5sPvPOcvBUU3xaGfGG6.UeAydaeNXvWKENmiNiqJK5plCeM6chG",
+                JobTitle = "HR Manager",
+                Role = Enums.Roles.SuperAdmin
+            });
 
             modelBuilder.Entity<Employee>().HasData(new Employee
             {
@@ -29,7 +40,6 @@ namespace CompanyWebApi.Data
                 Gender = Gender.Male,
                 PhoneNumber = "09776573458",
                 Department = "IT",
-                IDNumber = 23049700,
                 JobTitle = "Software Developer"
             });
             modelBuilder.Entity<Employee>().HasData(new Employee
@@ -45,7 +55,6 @@ namespace CompanyWebApi.Data
                 Gender = Gender.Male,
                 PhoneNumber = "0875667487",
                 Department = "IT",
-                IDNumber = 230465800,
                 JobTitle = "Software Developer"
             });
             modelBuilder.Entity<Employee>().HasData(new Employee
@@ -61,7 +70,6 @@ namespace CompanyWebApi.Data
                 Gender = Gender.Female,
                 PhoneNumber = "07873274671",
                 Department = "HR",
-                IDNumber = 23049700,
                 JobTitle = "Human Resource Manager"
             });
             modelBuilder.Entity<Employee>().HasData(new Employee
@@ -77,11 +85,10 @@ namespace CompanyWebApi.Data
                 PhoneNumber = "076748624",
                 LastName = "Kamau",
                 Department = "Sales",
-                IDNumber = 23049700,
                 JobTitle = "Sales Manager"
             });
+
+
         }
-
-
     }
 }

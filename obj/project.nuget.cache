@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "dKlJBAGY0DL9h9Ttw95buDNtJgbcytn3rP7NvI+OlfQlq33khmvIssBChZsmf2cOy5qU8JjEQi0fgGHlwoNHMw==",
+  "dgSpecHash": "dbpWKmCJ0hRepW86pNY6c5w9xgkhBGELW7yj8sW2QAFdXheCB1/9IrhpbEJEgW7T+qIaS3T0m0U2In2XXD60TA==",
   "success": true,
   "projectFilePath": "D:\\sammyDoc\\projects\\work_projects\\.net-work\\web-api\\CompanyWebApi\\CompanyWebApi.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\dorci\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\dorci\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\dorci\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\dorci\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\dorci\\.nuget\\packages\\castle.core\\4.3.1\\castle.core.4.3.1.nupkg.sha512",
     "C:\\Users\\dorci\\.nuget\\packages\\fakeiteasy\\7.3.1\\fakeiteasy.7.3.1.nupkg.sha512",
     "C:\\Users\\dorci\\.nuget\\packages\\fare\\2.1.1\\fare.2.1.1.nupkg.sha512",

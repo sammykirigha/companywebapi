@@ -9,13 +9,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<EmployeesContext>(options =>
+builder.Services.AddDbContext<DataContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), sqlServerOptionsAction: sqlOptions =>
 {
     sqlOptions.EnableRetryOnFailure();
 }));
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -30,9 +31,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     using (var scope = app.Services.CreateScope())
     {
-        var employeesContext = scope.ServiceProvider.GetRequiredService<EmployeesContext>();
-        employeesContext.Database.EnsureCreated();
-        employeesContext.Seed();
+        var dataContext = scope.ServiceProvider.GetRequiredService<DataContext>();
+        dataContext.Database.EnsureCreated();
+        dataContext.Seed();
     }
 }
 
@@ -41,7 +42,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
-    var context = services.GetRequiredService<EmployeesContext>();
+    var context = services.GetRequiredService<DataContext>();
     if (context.Database.GetPendingMigrations().Any())
     {
         context.Database.Migrate();

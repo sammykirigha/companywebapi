@@ -12,12 +12,12 @@ namespace CompanyWebApi.Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        private readonly EmployeesContext employeesContext;
+        private readonly DataContext _dataContext;
         private readonly IMapper _mapper;
 
-        public EmployeeRepository(EmployeesContext employeesContext, IMapper mapper)
+        public EmployeeRepository(DataContext dataContext, IMapper mapper)
         {
-            this.employeesContext = employeesContext;
+            _dataContext = dataContext;
             _mapper = mapper;
         }
 
@@ -25,7 +25,7 @@ namespace CompanyWebApi.Repositories
         {
             try
             {
-                var employees = employeesContext.Employees.OrderBy(e => e.Id).ToList();
+                var employees = _dataContext.Employees.OrderBy(e => e.Id).ToList();
                 return employees;
 
             }
@@ -41,7 +41,7 @@ namespace CompanyWebApi.Repositories
         {
             try
             {
-                var employee = this.employeesContext.Employees.Find(id);
+                var employee = _dataContext.Employees.Find(id);
                 var returnedEmployeeDto = _mapper.Map<EmployeeDto>(employee);
                 return returnedEmployeeDto == null ? throw new EmployeeErrorHandler("Could not retrieve employee with that id") : returnedEmployeeDto;
             }
@@ -57,12 +57,12 @@ namespace CompanyWebApi.Repositories
         {
             try
             {
-                var existingEmployee = employeesContext.Employees.FirstOrDefault(e => e.Email == employeeToCreate.Email);
+                var existingEmployee = _dataContext.Employees.FirstOrDefault(e => e.Email == employeeToCreate.Email);
                 if (existingEmployee == null)
                 {
-                    this.employeesContext.Employees.Add(employeeToCreate);
-                    employeesContext.SaveChanges();
-                    var createdEmployee = employeesContext.Employees.FirstOrDefault(e => e.Email == employeeToCreate.Email);
+                    _dataContext.Employees.Add(employeeToCreate);
+                    _dataContext.SaveChanges();
+                    var createdEmployee = _dataContext.Employees.FirstOrDefault(e => e.Email == employeeToCreate.Email);
                     var employeeToCreateMap = _mapper.Map<EmployeeDto>(createdEmployee);
                     return employeeToCreateMap;
                 }
@@ -85,10 +85,10 @@ namespace CompanyWebApi.Repositories
 
             try
             {
-                var employee = employeesContext.Employees.Find(id);
+                var employee = _dataContext.Employees.Find(id);
                 var deletedEmployee = _mapper.Map<EmployeeDto>(employee);
-                employeesContext.Employees.Remove(employee);
-                employeesContext.SaveChangesAsync();
+                _dataContext.Employees.Remove(employee);
+                _dataContext.SaveChangesAsync();
                 return employee == null ? throw new EmployeeErrorHandler("No Employee with that record found") : deletedEmployee;
             }
             catch (ErrorHandlerException ex)
@@ -103,7 +103,7 @@ namespace CompanyWebApi.Repositories
         {
             try
             {
-                var foundEmployee = employeesContext.Employees.Find(id);
+                var foundEmployee = _dataContext.Employees.Find(id);
                 if (foundEmployee != null)
                 {
                     foundEmployee.MaritalStatus = employee.MaritalStatus;
@@ -118,9 +118,9 @@ namespace CompanyWebApi.Repositories
                     foundEmployee.Email = employee.Email;
                     foundEmployee.JoinedDate = employee.JoinedDate;
 
-                    employeesContext.SaveChangesAsync();
+                    _dataContext.SaveChangesAsync();
 
-                    var updatedEmployee = employeesContext.Employees.Find(id);
+                    var updatedEmployee = _dataContext.Employees.Find(id);
 
                     return updatedEmployee;
                 }

@@ -6,7 +6,7 @@ namespace CompanyWebApi.Seed
 {
     public static class Seeder
     {
-        public static void Seed(this EmployeesContext employeesContext)
+        public static void Seed(this DataContext employeesContext)
         {
             if (!employeesContext.Employees.Any())
             {

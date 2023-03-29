@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using CompanyWebApi.Dto;
+using CompanyWebApi.Dtos;
 using CompanyWebApi.Entities;
 
 namespace CompanyWebApi.Handler
 {
-    public class AutoMapperEmployee : Profile
+    public class AutoMapperUser : Profile
     {
-        public AutoMapperEmployee()
+        public AutoMapperUser()
         {
-            CreateMap<Employee, EmployeeDto>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
         }
+
     }
 }
