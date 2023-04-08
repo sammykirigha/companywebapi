@@ -9,16 +9,10 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CompanyWebApi.HelperFunctions
 {
-    public class Createtoken
+    static class Createtoken
     {
 
-        private readonly IConfiguration _configuration;
-
-        public Createtoken(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-        private string CreateToken(User user)
+        public static string CreateToken(User user, IConfiguration _configuration)
         {
             List<Claim> claims = new List<Claim> {
                 new Claim(ClaimTypes.Name, user.Username)

@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using CompanyWebApi.Dtos;
 using CompanyWebApi.Entities;
+using CompanyWebApi.HelperFunctions;
 using CompanyWebApi.Repositories.Contracts;
 using CompanyWebApi.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -16,25 +17,26 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CompanyWebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiController]
+    [Route("/auth")]
     public class AuthController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
+
+
 
         public AuthController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
-
-
         [HttpPost("Register")]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(User))]
         public async Task<ActionResult<string>> Register([FromBody] UserDto request)
         {
-
             try
             {
+
                 var newUser = _userRepository.CreateNewUser(request);
                 return newUser == null ? NoContent() : Ok(new AuthResponse(201, "success", "User Created successfully"));
             }
@@ -47,15 +49,14 @@ namespace CompanyWebApi.Controllers
         }
 
 
-
-
         [HttpPost("Login")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
-        public async Task<ActionResult<User>> Login(string email, string password)
+        public async Task<ActionResult<User>> Login(LoginDto payload)
         {
             try
             {
-                var result = await _userRepository.Login(email, password);
+                int resultOne = PrintName.Add(3, 5);
+                var result = await _userRepository.Login(payload);
                 return result == null ? NoContent() : Ok(result);
             }
             catch (Exception ex)

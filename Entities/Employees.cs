@@ -1,5 +1,4 @@
 using System;
-using CompanyWebApi.enums;
 
 namespace CompanyWebApi.Entities
 {
@@ -18,9 +17,9 @@ namespace CompanyWebApi.Entities
 
         public DateTime? JoinedDate { get; set; }
 
-        public MaritalStatus MaritalStatus { get; set; }
+        public string? MaritalStatus { get; set; }
 
-        public Gender Gender { get; set; }
+        public string? Gender { get; set; }
 
         public string? PhoneNumber { get; set; }
 

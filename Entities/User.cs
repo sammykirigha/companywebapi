@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CompanyWebApi.Enums;
 
 namespace CompanyWebApi.Entities
 {
     public class User
     {
         public int Id { get; set; }
-        public Roles Role { get; set; } = Roles.Admin;
+
+        public int Role_Id { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
         public string JobTitle { get; set; }

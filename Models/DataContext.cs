@@ -24,20 +24,20 @@ namespace CompanyWebApi.Data
                 Username = "Sammy",
                 PasswordHash = "$2a$11$qb5sPvPOcvBUU3xaGfGG6.UeAydaeNXvWKENmiNiqJK5plCeM6chG",
                 JobTitle = "HR Manager",
-                Role = Enums.Roles.SuperAdmin
+                Role_Id = 1
             });
 
             modelBuilder.Entity<Employee>().HasData(new Employee
             {
                 Id = 1,
-                EmployeeNumber = 0001,
+                EmployeeNumber = 1,
                 FirstName = "Samuel",
                 LastName = "Kirigha",
-                MaritalStatus = MaritalStatus.Single,
+                MaritalStatus = "Single",
                 JoinedDate = new DateTime(2020, 3, 1),
                 BirthDate = new DateTime(1995, 1, 16),
                 Email = "sammy@companywebapi.com",
-                Gender = Gender.Male,
+                Gender = "Male",
                 PhoneNumber = "09776573458",
                 Department = "IT",
                 JobTitle = "Software Developer"
@@ -45,14 +45,14 @@ namespace CompanyWebApi.Data
             modelBuilder.Entity<Employee>().HasData(new Employee
             {
                 Id = 2,
-                EmployeeNumber = 0002,
+                EmployeeNumber = 2,
                 FirstName = "John",
                 LastName = "Mwasho",
-                MaritalStatus = MaritalStatus.Single,
+                MaritalStatus = "Single",
                 JoinedDate = new DateTime(2022, 3, 1),
                 BirthDate = new DateTime(1999, 1, 16),
                 Email = "john@companywebapi.com",
-                Gender = Gender.Male,
+                Gender = "Male",
                 PhoneNumber = "0875667487",
                 Department = "IT",
                 JobTitle = "Software Developer"
@@ -60,14 +60,14 @@ namespace CompanyWebApi.Data
             modelBuilder.Entity<Employee>().HasData(new Employee
             {
                 Id = 3,
-                EmployeeNumber = 0003,
+                EmployeeNumber = 3,
                 FirstName = "Jane",
                 LastName = "Wambui",
-                MaritalStatus = MaritalStatus.Married,
+                MaritalStatus = "Married",
                 JoinedDate = new DateTime(2021, 3, 1),
                 BirthDate = new DateTime(1985, 1, 16),
                 Email = "jane@companywebapi.com",
-                Gender = Gender.Female,
+                Gender = "Female",
                 PhoneNumber = "07873274671",
                 Department = "HR",
                 JobTitle = "Human Resource Manager"
@@ -75,13 +75,13 @@ namespace CompanyWebApi.Data
             modelBuilder.Entity<Employee>().HasData(new Employee
             {
                 Id = 4,
-                EmployeeNumber = 0004,
+                EmployeeNumber = 4,
                 FirstName = "Peter",
-                MaritalStatus = MaritalStatus.Single,
+                MaritalStatus = "Single",
                 JoinedDate = new DateTime(2020, 3, 1),
                 BirthDate = new DateTime(1989, 1, 16),
                 Email = "peter@companywebapi.com",
-                Gender = Gender.Male,
+                Gender = "Male",
                 PhoneNumber = "076748624",
                 LastName = "Kamau",
                 Department = "Sales",

@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS dbo.Users;
 CREATE TABLE dbo.Users
 (
     ID INT IDENTITY PRIMARY KEY,
-    [Role] INT NULL,
+    Role_Id INT FOREIGN KEY REFERENCES  dbo.Roles(ID),
     Username VARCHAR(100) NULL,
     Email VARCHAR(255) NOT NULL,
     JobTitle VARCHAR(100) NULL,
@@ -13,9 +13,10 @@ CREATE TABLE dbo.Users
 GO
 
 INSERT INTO dbo.Users
-    ([Role], Username, email, JobTitle, PasswordHash)
+    ([Role_Id], Username, email, JobTitle, PasswordHash)
 VALUES
-    (0, 'Samuel', 'sammy@gmail.com', 'HR', '$2a$11$jRXMaVLv9WTVrW/FWsA1M.cakCs0fybaKu.d5c.r04ysn78/FPVZy')
+    (1, 'Samuel', 'sammy@gmail.com', 'HR', '$2a$11$jRXMaVLv9WTVrW/FWsA1M.cakCs0fybaKu.d5c.r04ysn78/FPVZy')
 
 SELECT *
-FROM dbo.Users;
+FROM dbo.Users
+WHERE email = 'sammy@gmail.com';

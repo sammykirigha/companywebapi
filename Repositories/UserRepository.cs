@@ -8,7 +8,6 @@ using AutoMapper;
 using CompanyWebApi.Data;
 using CompanyWebApi.Dtos;
 using CompanyWebApi.Entities;
-using CompanyWebApi.Enums;
 using CompanyWebApi.Exceptions;
 using CompanyWebApi.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
@@ -63,17 +62,17 @@ namespace CompanyWebApi.Repositories
         }
 
 
-        public async Task<User> Login(string email, string password)
+        public async Task<User> Login(LoginDto payload)
         {
             try
             {
                 // var payloadMap = _mapper.Map<User>(payload);
-                var existingUser = await _dataContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+                var existingUser = await _dataContext.Users.FirstOrDefaultAsync(u => u.Email == payload.Email);
                 if (existingUser == null)
                 {
-                    throw new ErrorHandlerException("Wrong email!! try again");
+                    throw new ErrorHandlerException("Wrong email!! tryagain");
                 };
-                if (!VerifyPasswordHash(password, existingUser!.PasswordHash)) throw new ErrorHandlerException("password wong!!");
+                if (!VerifyPasswordHash(payload.Password, existingUser!.PasswordHash)) throw new ErrorHandlerException("password wong!!");
 
                 string token = CreateToken(existingUser);
                 existingUser.Token = token;
