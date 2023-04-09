@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\sammyDoc\\projects\\work_projects\\.net-work\\web-api\\CompanyWebApi\\CompanyWebApi.csproj": {}
+    "D:\\PROJECTS\\WORK-PROJECTS\\DOTNET\\web-api\\CompanyWebApi\\CompanyWebApi.csproj": {}
   },
   "projects": {
-    "D:\\sammyDoc\\projects\\work_projects\\.net-work\\web-api\\CompanyWebApi\\CompanyWebApi.csproj": {
+    "D:\\PROJECTS\\WORK-PROJECTS\\DOTNET\\web-api\\CompanyWebApi\\CompanyWebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\sammyDoc\\projects\\work_projects\\.net-work\\web-api\\CompanyWebApi\\CompanyWebApi.csproj",
+        "projectUniqueName": "D:\\PROJECTS\\WORK-PROJECTS\\DOTNET\\web-api\\CompanyWebApi\\CompanyWebApi.csproj",
         "projectName": "CompanyWebApi",
-        "projectPath": "D:\\sammyDoc\\projects\\work_projects\\.net-work\\web-api\\CompanyWebApi\\CompanyWebApi.csproj",
+        "projectPath": "D:\\PROJECTS\\WORK-PROJECTS\\DOTNET\\web-api\\CompanyWebApi\\CompanyWebApi.csproj",
         "packagesPath": "C:\\Users\\dorci\\.nuget\\packages\\",
-        "outputPath": "D:\\sammyDoc\\projects\\work_projects\\.net-work\\web-api\\CompanyWebApi\\obj\\",
+        "outputPath": "D:\\PROJECTS\\WORK-PROJECTS\\DOTNET\\web-api\\CompanyWebApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dorci\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -91,6 +91,10 @@
             "Mock": {
               "target": "Package",
               "version": "[1.0.0, )"
+            },
+            "NLog": {
+              "target": "Package",
+              "version": "[5.1.3, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
