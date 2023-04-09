@@ -9,7 +9,7 @@ namespace CompanyWebApi.Extensions
 {
     public class LoggerService : ILoggerManager
     {
-        private static ILogger logger = LogManager.GetCurrentClassLogger();
+        private static NLog.ILogger logger = LogManager.GetCurrentClassLogger();
 
         public void LogDebug(string message)
         {
